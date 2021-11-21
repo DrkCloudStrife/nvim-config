@@ -1,21 +1,30 @@
+
+set autoindent
+set clipboard=unnamed
+set expandtab
+set foldlevel=1
+set foldmethod=indent
+set guifont=Anonymous\ Pro:h18
+set hlsearch
+set ignorecase
+set nobackup
+set nocompatible
+set noswapfile
+set nowrap
+set number
+set ruler
+set shiftwidth=2
+set smarttab
+set tabstop=2
+
+"Plugin configurations
 set wildignore=*/app/assets/images/*,*/log/*,*/tmp/*,*/public/assets/*,*/public/course-data/*,*/public/system/*,*/public/api/v1/system/*,*/data/course-data/*,*/data/shared/*,.DS_Store,*/node_modules/*,public/app/packs/js/*
 set wildignore+=*.png,*.jpg,*.gif,*.jpeg,*.svg
+
 let g:CommandTMaxFiles=80085
 let g:buffergator_suppress_keymaps=1
 let g:ack_default_options = " -s -H --nocolor --nogroup --column --ignore-dir={data,log,tmp,node_modules,dist} --ignore-dir={public/app/packs,public/account/packs,public/app/packs-test}"
-set foldmethod=indent
-set foldlevel=1
 
-set nocompatible
-set nowrap
-set guifont=Anonymous\ Pro:h18
-
-set ruler
-set ignorecase
-set number
-set nobackup
-set noswapfile
-set clipboard=unnamed
 filetype off
 
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
@@ -45,7 +54,6 @@ call plug#end()
 
 syntax on
 filetype plugin indent on
-set tabstop=2
 set smarttab
 set shiftwidth=2
 set autoindent
