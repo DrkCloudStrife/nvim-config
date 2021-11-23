@@ -30,6 +30,7 @@ call plug#begin("~/.vim/plugged")
   Plug 'dracula/vim',{ 'name': 'dracula' }
   Plug 'ervandew/supertab'
   Plug 'jeetsukumaran/vim-buffergator'
+  Plug 'kchmck/vim-coffee-script'
   Plug 'mileszs/ack.vim'
   Plug 'posva/vim-vue'
   Plug 'pangloss/vim-javascript'
@@ -38,6 +39,7 @@ call plug#begin("~/.vim/plugged")
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rails'
+  Plug 'tpope/vim-rbenv'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-ruby/vim-ruby'
   Plug 'wincent/command-t'
@@ -85,6 +87,9 @@ nnoremap <silent> <Leader>BT :BuffergatorTabsClose<CR>
 
 " FUNCTIONS
 " =========
+
+" Autoset ruby to 3.0.2 for command-t
+autocmd VimEnter * Rbenv shell 3.0.2
 
 " Strip trailing whitespace (,ss)
 function! StripWhiteSpace ()
