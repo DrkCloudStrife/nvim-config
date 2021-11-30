@@ -1,47 +1,40 @@
 " Vim Configurations
-set tabstop=2
-set ruler
-set number
-set smarttab
-set shiftwidth=2
 set autoindent
-set expandtab
-set hlsearch
-set foldmethod=indent
-set foldlevel=1
-set guifont=Anonymous\ Pro:h18
 set clipboard+=unnamedplus
-
-set wildignore=*/app/assets/images/*,*/log/*,*/tmp/*,*/public/assets/*,*/public/course-data/*,*/public/system/*,*/public/api/v1/system/*,*/data/course-data/*,*/data/shared/*,.DS_Store
-set wildignore+=*.png,*.jpg,*.gif,*.jpeg
+set encoding=utf-8
+set expandtab
+set foldlevel=1
+set foldmethod=indent
+set guifont=Anonymous\ Pro:h18
+set hlsearch
+set ignorecase
+set nobackup
+set nocompatible
+set noswapfile
+set nowrap
+set number
+set ruler
+set shiftwidth=2
+set smarttab
+set tabstop=2
 
 "Plugin configurations
+set wildignore=*/app/assets/images/*,*/log/*,*/tmp/*,*/public/assets/*,*/public/course-data/*,*/public/system/*,*/public/api/v1/system/*,*/data/course-data/*,*/data/shared/*,.DS_Store,*/node_modules/*,public/app/packs/js/*
+set wildignore+=*.png,*.jpg,*.gif,*.jpeg
+
+let g:CommandTMaxFiles=80085
 let g:buffergator_suppress_keymaps=1
-let g:ack_default_options = " -s -H --nocolor --nogroup --column --ignore-dir=data --ignore-dir=log --ignore-dir=tmp"
+let g:ack_default_options = " -s -H --nocolor --nogroup --column --ignore-dir={data,log,tmp,node_modules,dist} --ignore-dir={public/app/packs,public/account/packs,public/app/packs-test}"
 
 let g:python_host_prog='/usr/bin/python2.7'
 let g:python3_host_prog='/usr/bin/python3'
-
-"let g:clipboard='/usr/bin/xclip'
-
-"let g:clipboard = {
-            "'name': 'myClipboard',
-            "'copy': { 
-               "'+': 'tmux load-buffer -',
-               "'*': 'tmux load-buffer -',
-             "},             
-            "'paste': {
-               "'+': 'tmux save-buffer -',
-               "'*': 'tmux save-buffer -',                                 
-            "},
-            "'cache_enabled': 1,
-          "}
 
 
 " vim-plug packages
 call plug#begin('~/.nvim/plugged')
 
 Plug 'airblade/vim-gitgutter'
+Plug 'ervandew/supertab'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'junegunn/vim-easy-align'
 Plug 'mileszs/ack.vim'
@@ -52,7 +45,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rvm'
 Plug 'tpope/vim-surround'
 Plug 'wincent/command-t'
-Plug 'ervandew/supertab'
 
 " Themes
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -60,10 +52,11 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 " highlighters/syntax
 Plug 'briancollins/vim-jst'
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'pangloss/vim-javascript'
 Plug 'posva/vim-vue'
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
-Plug 'pangloss/vim-javascript'
+Plug 'vim-scripts/indentpython.vim'
 
 " Initialize plugin system
 call plug#end()
