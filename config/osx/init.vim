@@ -1,4 +1,3 @@
-
 set autoindent
 set clipboard=unnamed
 set expandtab
