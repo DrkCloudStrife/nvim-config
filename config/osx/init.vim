@@ -53,13 +53,16 @@ call plug#begin("~/.vim/plugged")
   Plug 'wincent/command-t'
 call plug#end()
 
+let g:ale_fixers = {
+      \ 'javascript': ['eslint'],
+      \ 'ruby': ['rubocop']
+      \ }
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠️'
+let g:ale_fix_on_save = 1
+
 syntax on
 filetype plugin indent on
-set smarttab
-set shiftwidth=2
-set autoindent
-set expandtab
-set hlsearch
 
 let otl_map_tabs = 1
 let otl_install_menu=1
@@ -67,13 +70,6 @@ let no_otl_maps=0
 let no_otl_insert_maps=0
 
 let mapleader=','
-
-let g:ale_fixers = {
-      \ 'javascript': ['eslint']
-      \ }
-" let g:ale_sign_error = '❌'
-" let g:ale_sign_warning = '⚠️'
-let g:ale_fix_on_save = 1
 
 noremap <leader>t :CommandT<CR>
 noremap <leader>sd :NERDTree<CR>
