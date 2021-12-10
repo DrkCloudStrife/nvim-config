@@ -17,49 +17,52 @@ set ruler
 set shiftwidth=2
 set smarttab
 set tabstop=2
-
-"Plugin configurations
 set wildignore=*/app/assets/images/*,*/log/*,*/tmp/*,*/public/assets/*,*/public/course-data/*,*/public/system/*,*/public/api/v1/system/*,*/data/course-data/*,*/data/shared/*,.DS_Store,*/node_modules/*,public/app/packs/js/*
 set wildignore+=*.png,*.jpg,*.gif,*.jpeg
 
+" vim-plug packages
+call plug#begin('~/.nvim/plugged')
+  Plug 'airblade/vim-gitgutter'
+  Plug 'ervandew/supertab'
+  Plug 'jeetsukumaran/vim-buffergator'
+  Plug 'junegunn/vim-easy-align'
+  Plug 'mileszs/ack.vim'
+  Plug 'preservim/nerdcommenter'
+  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+  Plug 'tpope/vim-endwise'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-rvm'
+  Plug 'tpope/vim-surround'
+  Plug 'wincent/command-t'
+
+  " Themes
+  Plug 'dracula/vim', { 'as': 'dracula' }
+
+  " highlighters/syntax
+  Plug 'briancollins/vim-jst'
+  Plug 'octol/vim-cpp-enhanced-highlight'
+  Plug 'pangloss/vim-javascript'
+  Plug 'posva/vim-vue'
+  Plug 'tpope/vim-rails'
+  Plug 'vim-ruby/vim-ruby'
+  Plug 'vim-scripts/indentpython.vim'
+" Initialize plugin system
+call plug#end()
+
+"Plugin configurations
 let g:CommandTMaxFiles=80085
 let g:buffergator_suppress_keymaps=1
 let g:ack_default_options = " -s -H --nocolor --nogroup --column --ignore-dir={data,log,tmp,node_modules,dist} --ignore-dir={public/app/packs,public/account/packs,public/app/packs-test}"
 
 let g:python_host_prog='/usr/bin/python2.7'
 let g:python3_host_prog='/usr/bin/python3'
-
-
-" vim-plug packages
-call plug#begin('~/.nvim/plugged')
-
-Plug 'airblade/vim-gitgutter'
-Plug 'ervandew/supertab'
-Plug 'jeetsukumaran/vim-buffergator'
-Plug 'junegunn/vim-easy-align'
-Plug 'mileszs/ack.vim'
-Plug 'preservim/nerdcommenter'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rvm'
-Plug 'tpope/vim-surround'
-Plug 'wincent/command-t'
-
-" Themes
-Plug 'dracula/vim', { 'as': 'dracula' }
-
-" highlighters/syntax
-Plug 'briancollins/vim-jst'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'pangloss/vim-javascript'
-Plug 'posva/vim-vue'
-Plug 'tpope/vim-rails'
-Plug 'vim-ruby/vim-ruby'
-Plug 'vim-scripts/indentpython.vim'
-
-" Initialize plugin system
-call plug#end()
+let g:ale_fixers = {
+      \ 'javascript': ['eslint'],
+      \ 'ruby': ['rubocop']
+      \ }
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠️'
+let g:ale_fix_on_save = 1
 
 syntax on
 filetype plugin indent on
