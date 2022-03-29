@@ -32,7 +32,7 @@ call plug#begin("~/.vim/plugged")
   Plug 'dense-analysis/ale'
   Plug 'dracula/vim',{ 'name': 'dracula' }
   Plug 'ervandew/supertab'
-  Plug 'iamcco/markdown-preview.vim'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
   Plug 'iamcco/mathjax-support-for-mkdp'
   Plug 'jeetsukumaran/vim-buffergator'
   Plug 'kchmck/vim-coffee-script'
@@ -155,7 +155,7 @@ command! PrettyXML call DoPrettyXML()
 
 " Pretty JSON
 function! DoPrettyJSON()
-  silent %!python2.7 -m json.tool
+  silent %!python3 -m json.tool
 endfunction
 command! PrettyJSON call DoPrettyJSON()
 
