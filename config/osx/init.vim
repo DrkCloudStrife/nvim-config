@@ -32,6 +32,8 @@ call plug#begin("~/.vim/plugged")
   Plug 'dense-analysis/ale'
   Plug 'dracula/vim',{ 'name': 'dracula' }
   Plug 'ervandew/supertab'
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  Plug 'hashivim/vim-terraform'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
   Plug 'iamcco/mathjax-support-for-mkdp'
   Plug 'jeetsukumaran/vim-buffergator'
@@ -69,7 +71,10 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ack_default_options = " -s -H --nocolor --nogroup --column --ignore-dir={data,log,tmp,node_modules,dist} --ignore-dir={public/app/packs,public/account/packs,public/app/packs-test}"
 let g:CommandTMaxFiles = 80085
 let g:buffergator_suppress_keymaps = 1
+
 let g:indentLine_char = '⦙'
+let g:vim_json_conceal = 0
+let g:markdown_syntax_conceal=0
 
 let otl_map_tabs = 1
 let otl_install_menu=1
