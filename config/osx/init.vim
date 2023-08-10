@@ -60,21 +60,36 @@ filetype plugin indent on
 "Plugin configurations
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_fixers = {
-      \ 'javascript': ['eslint'],
-      \ 'ruby': ['rubocop']
-      \ }
+\   'javascript': ['eslint'],
+\   'ruby': ['rubocop']
+\ }
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'python': ['flake8','black'],
+\   'ruby': ['rubocop','ruby']
+\ }
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
 let g:ale_lint_on_text_changed = 'never'
-" let g:ale_fix_on_save = 1
+let g:ale_lint_on_save = 1
+let b:ale_fix_on_save = 0
+let g:ale_set_highlights = 0 " Disable highligting
+
+highlight ALEWarning ctermbg=DarkMagenta
+highlight ALEError ctermbg=DarkMagenta
+
+highlight ALEError ctermbg=none cterm=underline
+highlight ALEWarning ctermbg=none cterm=underline
 
 let g:ack_default_options = " -s -H --nocolor --nogroup --column --ignore-dir={data,log,tmp,node_modules,dist} --ignore-dir={public/app/packs,public/account/packs,public/app/packs-test}"
-let g:CommandTMaxFiles = 80085
 let g:buffergator_suppress_keymaps = 1
 
 let g:indentLine_char = '⦙'
 let g:vim_json_conceal = 0
 let g:markdown_syntax_conceal=0
+
+let g:CommandTMaxFiles = 80085
+let g:CommandTPreferredImplementation='ruby'
 
 let otl_map_tabs = 1
 let otl_install_menu=1
