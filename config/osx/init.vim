@@ -15,14 +15,8 @@ set ruler
 set shiftwidth=2
 set smarttab
 set tabstop=2
-
-"Plugin configurations
 set wildignore=*/app/assets/images/*,*/log/*,*/tmp/*,*/public/assets/*,*/public/course-data/*,*/public/system/*,*/public/api/v1/system/*,*/data/course-data/*,*/data/shared/*,.DS_Store,*/node_modules/*,public/app/packs/js/*
 set wildignore+=*.png,*.jpg,*.gif,*.jpeg,*.svg
-
-let g:CommandTMaxFiles=80085
-let g:buffergator_suppress_keymaps=1
-let g:ack_default_options = " -s -H --nocolor --nogroup --column --ignore-dir={data,log,tmp,node_modules,dist} --ignore-dir={public/app/packs,public/account/packs,public/app/packs-test}"
 
 filetype off
 
@@ -33,15 +27,21 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin("~/.vim/plugged")
+  Plug 'Yggdroot/indentLine'
   Plug 'airblade/vim-gitgutter'
   Plug 'dense-analysis/ale'
   Plug 'dracula/vim',{ 'name': 'dracula' }
   Plug 'ervandew/supertab'
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  Plug 'hashivim/vim-terraform'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+  Plug 'iamcco/mathjax-support-for-mkdp'
   Plug 'jeetsukumaran/vim-buffergator'
   Plug 'kchmck/vim-coffee-script'
   Plug 'mileszs/ack.vim'
-  Plug 'posva/vim-vue'
   Plug 'pangloss/vim-javascript'
+  Plug 'pedrohdz/vim-yaml-folds'
+  Plug 'posva/vim-vue'
   Plug 'preservim/nerdcommenter'
   Plug 'preservim/nerdtree'
   Plug 'tpope/vim-endwise'
@@ -49,20 +49,48 @@ call plug#begin("~/.vim/plugged")
   Plug 'tpope/vim-rails'
   Plug 'tpope/vim-rbenv'
   Plug 'vim-airline/vim-airline'
+  Plug 'vim-python/python-syntax'
   Plug 'vim-ruby/vim-ruby'
   Plug 'wincent/command-t'
 call plug#end()
 
-let g:ale_fixers = {
-      \ 'javascript': ['eslint'],
-      \ 'ruby': ['rubocop']
-      \ }
-let g:ale_sign_error = '❌'
-let g:ale_sign_warning = '⚠️'
-let g:ale_fix_on_save = 1
-
 syntax on
 filetype plugin indent on
+
+"Plugin configurations
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\   'ruby': ['rubocop']
+\ }
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'python': ['flake8','black'],
+\   'ruby': ['rubocop','ruby'],
+\   'dockerfile': ['dockerfile_lint', 'dockerlinter', 'hadolint']
+\ }
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_save = 1
+let b:ale_fix_on_save = 0
+let g:ale_set_highlights = 0 " Disable highligting
+
+highlight ALEWarning ctermbg=DarkMagenta
+highlight ALEError ctermbg=DarkMagenta
+
+highlight ALEError ctermbg=none cterm=underline
+highlight ALEWarning ctermbg=none cterm=underline
+
+let g:ack_default_options = " -s -H --nocolor --nogroup --column --ignore-dir={data,log,tmp,node_modules,dist} --ignore-dir={public/app/packs,public/account/packs,public/app/packs-test}"
+let g:buffergator_suppress_keymaps = 1
+
+let g:indentLine_char = '⦙'
+let g:vim_json_conceal = 0
+let g:markdown_syntax_conceal=0
+
+let g:CommandTMaxFiles = 80085
+let g:CommandTPreferredImplementation='ruby'
 
 let otl_map_tabs = 1
 let otl_install_menu=1
@@ -70,6 +98,13 @@ let no_otl_maps=0
 let no_otl_insert_maps=0
 
 let mapleader=','
+
+"NERDCommenter
+let g:NERDCreateDefaultMappings = 1
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
 
 noremap <leader>t :CommandT<CR>
 noremap <leader>sd :NERDTree<CR>
@@ -93,6 +128,9 @@ nnoremap <silent> <Leader>BT :BuffergatorTabsClose<CR>
 
 " Autoset ruby to 3.0.2 for command-t
 autocmd VimEnter * Rbenv shell 3.0.2
+
+" YAML 2 space indentation
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " Strip trailing whitespace (,ss)
 function! StripWhiteSpace ()
@@ -138,7 +176,7 @@ command! PrettyXML call DoPrettyXML()
 
 " Pretty JSON
 function! DoPrettyJSON()
-  silent %!python2.7 -m json.tool
+  silent %!python3 -m json.tool
 endfunction
 command! PrettyJSON call DoPrettyJSON()
 
