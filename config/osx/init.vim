@@ -66,7 +66,8 @@ let g:ale_fixers = {
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'python': ['flake8','black'],
-\   'ruby': ['rubocop','ruby']
+\   'ruby': ['rubocop','ruby'],
+\   'dockerfile': ['dockerfile_lint', 'dockerlinter', 'hadolint']
 \ }
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
