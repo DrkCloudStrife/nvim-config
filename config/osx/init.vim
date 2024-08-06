@@ -61,7 +61,8 @@ filetype plugin indent on
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
-\   'ruby': ['rubocop']
+\   'ruby': ['rubocop'],
+\   'dockerfile': ['dprint']
 \ }
 let g:ale_linters = {
 \   'javascript': ['eslint'],
