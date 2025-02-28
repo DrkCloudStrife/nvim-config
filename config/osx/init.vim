@@ -30,7 +30,8 @@ call plug#begin("~/.vim/plugged")
   Plug 'Yggdroot/indentLine'
   Plug 'airblade/vim-gitgutter'
   Plug 'dense-analysis/ale'
-  Plug 'dracula/vim',{ 'name': 'dracula' }
+  " Plug 'dracula/vim',{ 'name': 'dracula' }
+  Plug 'Mofiqul/dracula.nvim'
   Plug 'ervandew/supertab'
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'hashivim/vim-terraform'
@@ -53,6 +54,8 @@ call plug#begin("~/.vim/plugged")
   Plug 'vim-ruby/vim-ruby'
   Plug 'wincent/command-t'
 call plug#end()
+"colorscheme dracula
+colorscheme dracula-soft
 
 syntax on
 filetype plugin indent on
