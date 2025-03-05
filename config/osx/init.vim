@@ -30,7 +30,6 @@ call plug#begin("~/.vim/plugged")
   Plug 'Yggdroot/indentLine'
   Plug 'airblade/vim-gitgutter'
   Plug 'dense-analysis/ale'
-  Plug 'dracula/vim',{ 'name': 'dracula' }
   Plug 'ervandew/supertab'
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'hashivim/vim-terraform'
@@ -52,12 +51,16 @@ call plug#begin("~/.vim/plugged")
   Plug 'vim-python/python-syntax'
   Plug 'vim-ruby/vim-ruby'
   Plug 'wincent/command-t'
+
+  " Themes
+  Plug 'maxmx03/dracula.nvim'
 call plug#end()
 
 syntax on
 filetype plugin indent on
 
 "Plugin configurations
+colorscheme dracula
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
@@ -90,7 +93,7 @@ let g:vim_json_conceal = 0
 let g:markdown_syntax_conceal=0
 
 let g:CommandTMaxFiles = 80085
-let g:CommandTPreferredImplementation='ruby'
+let g:CommandTPreferredImplementation='lua'
 
 let otl_map_tabs = 1
 let otl_install_menu=1
@@ -126,8 +129,8 @@ nnoremap <silent> <Leader>BT :BuffergatorTabsClose<CR>
 " FUNCTIONS
 " =========
 
-" Autoset ruby to 3.0.2 for command-t
-autocmd VimEnter * Rbenv shell 3.0.2
+" Autoset ruby to 3.3.7 for command-t
+autocmd VimEnter * Rbenv shell 3.3.7
 
 " YAML 2 space indentation
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
