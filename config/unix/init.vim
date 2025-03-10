@@ -31,7 +31,8 @@ call plug#begin('~/.nvim/plugged')
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-rvm'
+  "Plug 'tpope/vim-rvm'
+  Plug 'tpope/vim-rbenv'
   Plug 'tpope/vim-surround'
   Plug 'wincent/command-t'
 
@@ -50,6 +51,10 @@ call plug#begin('~/.nvim/plugged')
 call plug#end()
 
 "Plugin configurations
+let g:CommandTPreferredImplementation='lua'
+"require('wincent.commandt').setup({
+"  max_files=80085
+"})
 let g:CommandTMaxFiles=80085
 let g:buffergator_suppress_keymaps=1
 let g:ack_default_options = " -s -H --nocolor --nogroup --column --ignore-dir={data,log,tmp,node_modules,dist} --ignore-dir={public/app/packs,public/account/packs,public/app/packs-test}"
@@ -96,7 +101,7 @@ au BufWrite *.rb,*.coffee,*.scss :call StripWhiteSpace()
 
 "TODO: Move to a function to detect current version, if already default, do
 "nothing.
-autocmd VimEnter * Rvm use default
+autocmd VimEnter * Rbenv local 3.4.2
 
 " Pretty XML
 function! DoPrettyXML()
