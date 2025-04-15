@@ -33,7 +33,8 @@ call plug#begin("~/.vim/plugged")
   Plug 'ervandew/supertab'
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'hashivim/vim-terraform'
-  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+  " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
   Plug 'iamcco/mathjax-support-for-mkdp'
   Plug 'jeetsukumaran/vim-buffergator'
   Plug 'kchmck/vim-coffee-script'
@@ -54,13 +55,14 @@ call plug#begin("~/.vim/plugged")
 
   " Themes
   Plug 'maxmx03/dracula.nvim'
+  Plug 'EdenEast/nightfox.nvim'
 call plug#end()
 
 syntax on
 filetype plugin indent on
 
 "Plugin configurations
-colorscheme dracula
+colorscheme nordfox
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
