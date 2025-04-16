@@ -33,7 +33,6 @@ call plug#begin("~/.vim/plugged")
   Plug 'ervandew/supertab'
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'hashivim/vim-terraform'
-  " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
   Plug 'iamcco/mathjax-support-for-mkdp'
   Plug 'jeetsukumaran/vim-buffergator'
@@ -44,6 +43,7 @@ call plug#begin("~/.vim/plugged")
   Plug 'posva/vim-vue'
   Plug 'preservim/nerdcommenter'
   Plug 'preservim/nerdtree'
+  Plug 'robitx/gp.nvim'
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rails'
@@ -187,3 +187,62 @@ command! PrettyJSON call DoPrettyJSON()
 
 " Pretty CSS
 command! PrettyCSS :%s/[{;}]/&\r/g|norm! =gg
+
+" Lua Conf
+lua << EOF
+  -- Config for Gp.nvim
+  -- https://github.com/Robitx/gp.nvim/blob/8dd99d85adfcfcb326f85a1f15bcd254f628df59/lua/gp/config.lua#L10-L627
+  local config = {
+    -- configure provider
+    -- openai_api_key = os.getenv("OPENAI_API_KEY"),
+    providers = {
+      anthropic = {
+        disable = true,
+        endpoint = "https://api.anthropic.com/v1/messages",
+        secret = os.getenv("ANTHROPIC_API_KEY"),
+      },
+      openai = {
+        disable = true,
+        endpoint = "https://api.openai.com/v1/chat/completions",
+        secret = os.getenv("OPENAI_API_KEY"),
+      },
+      ollama = {
+        endpoint = "http://localhost:11434/v1/chat/completions",
+      },
+    },
+    agents = {
+      {
+        provider = "ollama",
+        name = "ChatOllamaLlama3.2B",
+        chat = true,
+        command = false,
+        -- string with model name or table with model name and parameters
+        model = {
+          model = "llama3.2",
+          temperature = 0.6,
+          top_p = 1,
+          min_p = 0.05,
+        },
+        -- system prompt (use this to specify the persona/role of the AI)
+        system_prompt = "You are a general AI assistant.",
+      },
+      {
+        provider = "ollama",
+        name = "CodeOllamaLlama3.2B",
+        chat = false,
+        command = true,
+        -- string with model name or table with model name and parameters
+        model = {
+          model = "llama3.2",
+          temperature = 0.4,
+          top_p = 1,
+          min_p = 0.05,
+        },
+        -- system prompt (use this to specify the persona/role of the AI)
+        system_prompt = require("gp.defaults").code_system_prompt,
+      },
+    },
+  }
+
+  require("gp").setup(config)
+EOF
