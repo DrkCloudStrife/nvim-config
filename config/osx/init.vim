@@ -197,12 +197,12 @@ lua << EOF
     -- openai_api_key = os.getenv("OPENAI_API_KEY"),
     providers = {
       anthropic = {
-        disable = true,
+        disable = false,
         endpoint = "https://api.anthropic.com/v1/messages",
-        secret = os.getenv("ANTHROPIC_API_KEY"),
+        secret = os.getenv("CLAUDE_API_KEY"),
       },
       openai = {
-        disable = true,
+        disable = false,
         endpoint = "https://api.openai.com/v1/chat/completions",
         secret = os.getenv("OPENAI_API_KEY"),
       },
