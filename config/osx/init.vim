@@ -32,6 +32,7 @@ call plug#begin("~/.vim/plugged")
   Plug 'dense-analysis/ale'
   Plug 'ervandew/supertab'
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  Plug 'github/copilot.vim'
   Plug 'hashivim/vim-terraform'
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
   Plug 'iamcco/mathjax-support-for-mkdp'
