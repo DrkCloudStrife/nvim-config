@@ -52,7 +52,7 @@ call plug#begin("~/.vim/plugged")
   Plug 'vim-airline/vim-airline'
   Plug 'vim-python/python-syntax'
   Plug 'vim-ruby/vim-ruby'
-  Plug 'wincent/command-t'
+  Plug 'wincent/command-t', { 'branch' : 'release' }
 
   " Themes
   Plug 'maxmx03/dracula.nvim'
@@ -96,7 +96,7 @@ let g:vim_json_conceal = 0
 let g:markdown_syntax_conceal=0
 
 let g:CommandTMaxFiles = 80085
-let g:CommandTPreferredImplementation='lua'
+" let g:CommandTPreferredImplementation='lua'
 
 let otl_map_tabs = 1
 let otl_install_menu=1
