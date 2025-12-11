@@ -111,6 +111,7 @@ let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
+let g:NERDTreeWinPos = "right"
 
 noremap <leader>t :CommandT<CR>
 noremap <leader>sd :NERDTree<CR>
@@ -137,6 +138,12 @@ autocmd VimEnter * Rbenv shell 3.3.7
 
 " YAML 2 space indentation
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+if &ft != 'gitcommit'
+  " Start NERDTree & switch main window
+  autocmd VimEnter * NERDTree
+  autocmd VimEnter * wincmd p
+endif
 
 " Strip trailing whitespace (,ss)
 function! StripWhiteSpace ()
@@ -241,6 +248,26 @@ lua << EOF
         },
         -- system prompt (use this to specify the persona/role of the AI)
         system_prompt = require("gp.defaults").code_system_prompt,
+      },
+      -- Claude Sonnet 4.5 ---
+      {
+        provider = "anthropic",
+        name = "CodeClaude-4-5-Sonnet",
+        chat = false,
+        command = true,
+        -- string with model name or table with model name and parameters
+        model = { model = "claude-sonnet-4-5-20250929", top_p = 0.8, min_p = 0.05 },
+        system_prompt = require("gp.defaults").code_system_prompt,
+      },
+      {
+        provider = "anthropic",
+        name = "ChatClaude-4-5-Sonnet",
+        chat = true,
+        command = false,
+        -- string with model name or table with model name and parameters
+        model = { model = "claude-sonnet-4-5-20250929", top_p = 0.8, min_p = 0.05 },
+        -- system prompt (use this to specify the persona/role of the AI)
+        system_prompt = require("gp.defaults").chat_system_prompt,
       },
     },
   }
