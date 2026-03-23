@@ -139,10 +139,9 @@ autocmd VimEnter * Rbenv shell 3.3.7
 " YAML 2 space indentation
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
-if &ft != 'gitcommit'
+if !exists('$GIT_EXEC_PATH')
   " Start NERDTree & switch main window
-  autocmd VimEnter * NERDTree
-  autocmd VimEnter * wincmd p
+  autocmd VimEnter * NERDTree | wincmd p
 endif
 
 " Strip trailing whitespace (,ss)
@@ -196,7 +195,7 @@ command! PrettyJSON call DoPrettyJSON()
 " Pretty CSS
 command! PrettyCSS :%s/[{;}]/&\r/g|norm! =gg
 
-" Lua Conf
+" Lua Conf for Gp.nvim
 lua << EOF
   -- Config for Gp.nvim
   -- https://github.com/Robitx/gp.nvim/blob/8dd99d85adfcfcb326f85a1f15bcd254f628df59/lua/gp/config.lua#L10-L627
@@ -216,6 +215,7 @@ lua << EOF
       },
       ollama = {
         endpoint = "http://localhost:11434/v1/chat/completions",
+        secret = "ollama",
       },
     },
     agents = {
@@ -273,4 +273,24 @@ lua << EOF
   }
 
   require("gp").setup(config)
+
+  -- Function to match Rubocop's Sorting
+  function RubocopSort(line1, line2)
+    local lines = vim.api.nvim_buf_get_lines(0, line1 - 1, line2, false)
+
+    table.sort(lines, function(a, b)
+      -- Treat both - and _ as the same for primary sort, then use original for tie-breaking
+      local a_normalized = a:lower():gsub("[-_]", "\x00")
+      local b_normalized = b:lower():gsub("[-_]", "\x00")
+
+      if a_normalized == b_normalized then
+        return a:lower() < b:lower()
+      end
+      return a_normalized < b_normalized
+    end)
+
+    vim.api.nvim_buf_set_lines(0, line1 - 1, line2, false, lines)
+  end
 EOF
+
+command! -range RubocopSort lua RubocopSort(<line1>, <line2>)
