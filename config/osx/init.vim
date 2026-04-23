@@ -39,12 +39,14 @@ call plug#begin("~/.vim/plugged")
   Plug 'jeetsukumaran/vim-buffergator'
   Plug 'kchmck/vim-coffee-script'
   Plug 'mileszs/ack.vim'
+  Plug 'mustache/vim-mustache-handlebars'
   Plug 'pangloss/vim-javascript'
   Plug 'pedrohdz/vim-yaml-folds'
   Plug 'posva/vim-vue'
   Plug 'preservim/nerdcommenter'
   Plug 'preservim/nerdtree'
   Plug 'robitx/gp.nvim'
+  Plug 'towolf/vim-helm'
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rails'
@@ -96,7 +98,6 @@ let g:vim_json_conceal = 0
 let g:markdown_syntax_conceal=0
 
 let g:CommandTMaxFiles = 80085
-" let g:CommandTPreferredImplementation='lua'
 
 let otl_map_tabs = 1
 let otl_install_menu=1
@@ -291,6 +292,9 @@ lua << EOF
 
     vim.api.nvim_buf_set_lines(0, line1 - 1, line2, false, lines)
   end
+
+  -- Setup/init command-t
+  require('wincent.commandt').setup()
 EOF
 
 command! -range RubocopSort lua RubocopSort(<line1>, <line2>)
