@@ -295,6 +295,14 @@ lua << EOF
 
   -- Setup/init command-t
   require('wincent.commandt').setup()
+
+  -- Ensure '*/templates/*.yaml' load with helm syntax
+  vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
+    pattern = '*/templates/*.yaml',
+    callback = function()
+      vim.opt_local.filetype = 'helm'
+    end,
+  })
 EOF
 
 command! -range RubocopSort lua RubocopSort(<line1>, <line2>)
