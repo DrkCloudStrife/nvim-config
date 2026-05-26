@@ -250,23 +250,43 @@ lua << EOF
         -- system prompt (use this to specify the persona/role of the AI)
         system_prompt = require("gp.defaults").code_system_prompt,
       },
-      -- Claude Sonnet 4.5 ---
+      -- Claude Sonnet 4.6 ---
       {
         provider = "anthropic",
-        name = "CodeClaude-4-5-Sonnet",
+        name = "CodeClaude-4-6-Sonnet",
         chat = false,
         command = true,
         -- string with model name or table with model name and parameters
-        model = { model = "claude-sonnet-4-5-20250929", top_p = 0.8, min_p = 0.05 },
+        model = { model = "claude-sonnet-4-6", top_p = 0.8, min_p = 0.05 },
         system_prompt = require("gp.defaults").code_system_prompt,
       },
       {
         provider = "anthropic",
-        name = "ChatClaude-4-5-Sonnet",
+        name = "ChatClaude-4-6-Sonnet",
         chat = true,
         command = false,
         -- string with model name or table with model name and parameters
-        model = { model = "claude-sonnet-4-5-20250929", top_p = 0.8, min_p = 0.05 },
+        model = { model = "claude-sonnet-4-6", top_p = 0.8, min_p = 0.05 },
+        -- system prompt (use this to specify the persona/role of the AI)
+        system_prompt = require("gp.defaults").chat_system_prompt,
+      },
+      -- Claude Opus 4.7 ---
+      {
+        provider = "anthropic",
+        name = "CodeClaude-4-7-Opus",
+        chat = false,
+        command = true,
+        -- string with model name or table with model name and parameters
+        model = { model = "claude-opus-4-7", top_p = 0.8, min_p = 0.05 },
+        system_prompt = require("gp.defaults").code_system_prompt,
+      },
+      {
+        provider = "anthropic",
+        name = "ChatClaude-4-7-Opus",
+        chat = true,
+        command = false,
+        -- string with model name or table with model name and parameters
+        model = { model = "claude-opus-4-7", top_p = 0.8, min_p = 0.05 },
         -- system prompt (use this to specify the persona/role of the AI)
         system_prompt = require("gp.defaults").chat_system_prompt,
       },
