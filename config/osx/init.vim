@@ -277,7 +277,7 @@ lua << EOF
         chat = false,
         command = true,
         -- string with model name or table with model name and parameters
-        model = { model = "claude-opus-4-7", top_p = 0.8, min_p = 0.05 },
+        model = { model = "claude-opus-4-7", min_p = 0.05 },
         system_prompt = require("gp.defaults").code_system_prompt,
       },
       {
@@ -286,7 +286,7 @@ lua << EOF
         chat = true,
         command = false,
         -- string with model name or table with model name and parameters
-        model = { model = "claude-opus-4-7", top_p = 0.8, min_p = 0.05 },
+        model = { model = "claude-opus-4-7", min_p = 0.05 },
         -- system prompt (use this to specify the persona/role of the AI)
         system_prompt = require("gp.defaults").chat_system_prompt,
       },
